@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.pvpfps.mod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ParticleManagerMixin",
+    "WorldRendererMixin",
+    "GameRendererMixin",
+    "EntityRendererMixin",
+    "ClientWorldMixin",
+    "MinecraftClientMixin",
+    "BackgroundRendererMixin",
+    "ChunkBuilderMixin",
+    "EntityMixin",
+    "AbstractClientPlayerEntityMixin",
+    "InGameHudMixin",
+    "SoundSystemMixin",
+    "FogMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
