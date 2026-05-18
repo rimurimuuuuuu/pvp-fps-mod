@@ -2,6 +2,8 @@ package com.pvpfps.mod.mixin;
 
 import com.pvpfps.mod.PvpFpsMod;
 import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,10 +19,9 @@ public class WorldRendererMixin {
 
     /**
      * Skip weather rendering (rain/snow particles) completely
-     * In PvP you don't need rain effects - just noise
      */
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
-    private void pvpfps$skipWeather(net.minecraft.client.util.math.MatrixStack matrices,
+    private void pvpfps$skipWeather(MatrixStack matrices,
                                      float tickDelta, double cameraX, double cameraY, double cameraZ,
                                      CallbackInfo ci) {
         if (PvpFpsMod.CONFIG.disableWeatherRendering) {
@@ -29,11 +30,11 @@ public class WorldRendererMixin {
     }
 
     /**
-     * Skip cloud chunk rebuild - clouds are pure FPS waste for PvP
+     * Skip cloud chunk rebuild
      */
     @Inject(method = "renderClouds", at = @At("HEAD"), cancellable = true)
-    private void pvpfps$skipClouds(net.minecraft.client.util.math.MatrixStack matrices,
-                                    net.joml.Matrix4f matrix4f, float tickDelta,
+    private void pvpfps$skipClouds(MatrixStack matrices,
+                                    Matrix4f matrix4f, float tickDelta,
                                     double cameraX, double cameraY, double cameraZ,
                                     CallbackInfo ci) {
         if (PvpFpsMod.CONFIG.disableClouds) {
